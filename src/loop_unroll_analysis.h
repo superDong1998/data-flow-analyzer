@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "dbg.h"
 
 #include "loop_mem_pat_node.h"
 
@@ -58,7 +59,14 @@ public:
         }
         auto type = pn->getType();
         if (type == CONSTANT) {
-            int const_value = stoi(pn->getConstantNum());
+            auto const_num = pn->getConstantNum();
+            // dbg(const_num);
+            int const_value;
+            // if (const_num) {
+                const_value = stoi(pn->getConstantNum());
+            // } else {
+                // const_value = -1111;
+            // }
             return const_value;
         } else if (type == LOOP_IND_VAR) {
             std::string ind_var = std::string(pn->getValueName());
@@ -73,7 +81,10 @@ public:
                 }
                 return sum;
             }
-        }
+        } else if (type == OTHERS) {
+            std::string othrs_value = std::string(pn->getValueName());
+            return 0;
+        } 
         return -1000;
     }
 

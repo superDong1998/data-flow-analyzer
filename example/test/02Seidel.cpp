@@ -9,23 +9,33 @@ void init(double A[N][N]) {
         }
     }
 }
-void seidel2d(double A[N][N]) {
-    for (int i = 1; i < N-1; i++ ) {
-        for (int j = 1; j < N-1; j++) {
-            A[i][j] = (A[i-1][j] + A[i][j-1] 
-              + A[i][j] + A[i][j+1] + A[i+1][j])/5;
-        }
-    }    
-}
+// void seidel2d(double A[N][N]) {
+//     for (int i = 1; i < N-1; i++ ) {
+//         for (int j = 1; j < N-1; j++) {
+//             A[i][j] = (A[i-1][j] + A[i][j-1] 
+//               + A[i][j] + A[i][j+1] + A[i+1][j])/5;
+//         }
+//     }    
+// }
 
 void seidel2d1(double A[N][N]) {
     for (int i = 1; i < N-1; i++ ) {
         for (int j = 1; j < N-1; j++) {
-            A[i][j] = (A[i-1][j-1] + A[i-1][j+1] 
-              + A[i][j] + A[i+1][j-1] + A[i+1][j+1])/5;
+            // A[i][j] = (A[i-1][j-1] + A[i-1][j+1] 
+            //   + A[i][j] + A[i+1][j-1] + A[i+1][j+1])/5;
+            // A[i][j+1] = A[i][j];
+            A[i][j] = A[i][j] + A[i-1][j-1];
         }
     }    
 }
+
+// void seidel2d2(double A[N][N]) {
+//     for (int i = 1; i < N-1; i++ ) {
+//         for (int j = 1; j < N-1; j++) {
+//             A[i][j] = A[i][j-1];
+//         }
+//     }    
+// }
 
 int main() {
     double A[N][N];

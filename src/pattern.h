@@ -11,7 +11,8 @@ enum pat_node_type_t {
   BIN_OP = 1,
   CAST_INST = 2,
   LOOP_IND_VAR = 3,
-  GEP_INST = 4
+  GEP_INST = 4,
+  OTHERS = 10
 };
 
 std::string typeToString(pat_node_type_t type) {
@@ -31,6 +32,9 @@ std::string typeToString(pat_node_type_t type) {
     break;
   case 4:
     str = std::string("GEP_INST");
+    break;
+  case 5:
+    str = std::string("OTHERS");
     break;
   default:
     break;
@@ -60,7 +64,7 @@ public:
       constant = std::string(str);
       val_name = std::string(" ");
       op = std::string(" ");
-    } else if (type == LOOP_IND_VAR || type == GEP_INST) {
+    } else if (type == LOOP_IND_VAR || type == GEP_INST || type == OTHERS) {
       val_name = std::string(str);
       constant = std::string(" ");
       op = std::string(" ");

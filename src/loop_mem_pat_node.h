@@ -38,6 +38,9 @@ public:
     }
 
     int getStartVal() {
+        if (_start == nullptr) {
+            return 0;
+        }
         if (_start->getType() == CONSTANT) {
             int val = stoi(_start->getConstantNum());
             return val;
@@ -46,6 +49,9 @@ public:
     }
 
     int getEndVal() {
+        if (_start == nullptr) {
+            return 0;
+        }
         if (_end->getType() == CONSTANT) {
             int val = stoi(_end->getConstantNum());
             return val;
@@ -54,11 +60,14 @@ public:
     }
 
     int getStepVal() {
+        if (_start == nullptr) {
+            return 1;
+        }
         if (_step->getType() == CONSTANT) {
             int val = stoi(_step->getConstantNum());
             return val;
         }
-        return 0;
+        return 1;
     }
 };
 

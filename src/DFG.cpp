@@ -31,6 +31,7 @@
 #include "loop_unroll_analysis.h"
 #include <list>
 #include <map>
+#include <unordered_map>
 #include <sstream>
 #include <string>
 
@@ -55,6 +56,7 @@ public:
   edge_list inst_edges; // control flow
   edge_list edges;      // data flow
   node_list nodes;      // instruction
+  std::unordered_map<Value*, std::string> value_to_name;
 
   int num;
   int func_id = 0;
@@ -135,6 +137,9 @@ public:
     std::string temp_result = "#val";
     if (!v) {
       return "undefined";
+    } 
+    if (value_to_name.find(v) != value_to_name.end()) {
+      return value_to_name[v];
     }
     if (v->getName().empty()) {
       if (isa<ConstantInt>(v)) {
@@ -149,6 +154,7 @@ public:
       temp_result = v->getName().str();
       // errs() << temp_result << "\n";
     }
+    value_to_name[v] = std::string(temp_result);
     return temp_result;
   }
 
@@ -225,17 +231,29 @@ public:
 
   Value *getLoopInitVar(Loop *L, ScalarEvolution &SE) {
     auto loop_bound = L->getBounds(SE);
-    return &(loop_bound->getInitialIVValue());
+    if (loop_bound) {
+      return &(loop_bound->getInitialIVValue());
+    } else {
+      return nullptr;
+    }
   }
 
   Value *getLoopStepVar(Loop *L, ScalarEvolution &SE) {
     auto loop_bound = L->getBounds(SE);
-    return loop_bound->getStepValue();
+    if (loop_bound) {
+      return loop_bound->getStepValue();
+    } else {
+      return nullptr;
+    }
   }
 
   Value *getLoopEndVar(Loop *L, ScalarEvolution &SE) {
     auto loop_bound = L->getBounds(SE);
-    return &(loop_bound->getFinalIVValue());
+    if (loop_bound) {
+      return &(loop_bound->getFinalIVValue());
+    } else {
+      return nullptr;
+    }
   }
 
   PatNode *getGEPPattern(GetElementPtrInst *gep_inst, DataLayout *DL) {
@@ -354,7 +372,7 @@ public:
         bin_node->addChild(child);
       } else {
         PatNode *invar_var =
-            new PatNode(operand, CONSTANT, getValueName(operand));
+            new PatNode(operand, OTHERS, getValueName(operand));
         bin_node->addChild(invar_var);
       }
     }
@@ -423,7 +441,7 @@ public:
       auto constant_v = dyn_cast<ConstantInt>(curII);
       return getConstPattern(constant_v);
     } else if (isa<PHINode>(curII)) {
-      PatNode *phi_node = new PatNode(curII, CONSTANT, getValueName(curII));
+      PatNode *phi_node = new PatNode(curII, OTHERS, getValueName(curII));
       return phi_node;
     }
 
@@ -641,7 +659,11 @@ public:
 
     for (auto &F : M) {
       if (!(F.isDeclaration())) {
-        funcDFG(&F, M);
+        if (F.getName() == "module_small_step_em_calc_p_rho_") {
+          std::cout << F.getName().str() << std::endl;
+        
+          funcDFG(&F, M);
+        }
       }
     }
     return true;
