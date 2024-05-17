@@ -1,6 +1,6 @@
 #include <iostream>
 #include <random>
-#define N 10000
+#define N 100
 int main() {
   double X[N][N][N] = {0};
   int sum = 0;

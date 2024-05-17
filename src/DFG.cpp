@@ -833,7 +833,9 @@ public:
       
       if (loop->loop->getName().str().find(loop0) != std::string::npos) {
         analyzed_loops.push_back(*loop);
+        #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
         std::cout << "0: " << loop->loop->getName().str() << std::endl;
+        #endif
       }
       if (loop->loop->getName().str() == (std::string("loop2 line:") + while_loop)) {
         // std::cout << "loop has " << loop->sub_loops.size() << " subloops" << std::endl;
@@ -843,35 +845,51 @@ public:
           auto temp = loop->sub_loops[i];
           if (!filter_same_loop(analyzed_loops, loop1) && temp.loop->getName().str().find(loop1) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "1: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "1: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop2) && temp.loop->getName().str().find(loop2) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "2: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "2: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop3) && temp.loop->getName().str().find(loop3) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "3: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "3: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop4) && temp.loop->getName().str().find(loop4) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "4: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "4: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop5) && temp.loop->getName().str().find(loop5) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "5: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "5: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop6) && temp.loop->getName().str().find(loop6) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "6: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "6: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop7) && temp.loop->getName().str().find(loop7) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "7: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "7: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
           if (!filter_same_loop(analyzed_loops, loop8) && temp.loop->getName().str().find(loop8) != std::string::npos) {
             analyzed_loops.push_back(temp);
-            // std::cout << "8: " << temp.loop->getName().str() << std::endl;
+            #if defined(INTER_ANALYSIS) && defined(GS_ONLY)
+            std::cout << "8: " << temp.loop->getName().str() << std::endl;
+            #endif
           }
         }
       }

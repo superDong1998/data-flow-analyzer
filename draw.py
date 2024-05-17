@@ -32,6 +32,8 @@ def main():
         parsed_data = ast.literal_eval(sys.argv[1])
     except:
         print(sys.argv)
+        if (sys.argv[1] == ''):
+            print("there is no dependence!")
         exit(1)
 
     draw_arrows(parsed_data)

@@ -1,8 +1,8 @@
 # llvm-compiled gs executable file path
-GS_EXE=
+GS_EXE=~/analysis/app/geodynamics-loop/src_cpu/Geodynamics_cpu.loop8
 
 CLANG=clang
-LLVM-DIS=llvm-dis
+LLVM_DIS=llvm-dis
 OPT=opt
 LLC=llc
 
