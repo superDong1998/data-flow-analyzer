@@ -4,6 +4,32 @@ add_llvm_library(DFGPass MODULE
     DFG.cpp
 )
 
+option(CFG "Enable CFG" OFF)
+option(DFG "Enable DFG" OFF)
+option(INTER_ANALYSIS "Enable INTER_ANALYSIS" OFF)
+option(INTRA_ANALYSIS "Enable INTRA_ANALYSIS" OFF)
+option(GS_ONLY "analysis in gauss_seidel only" OFF)
+
+if(CFG)
+ add_definitions(-DCFG)
+endif()
+
+if(DFG)
+ add_definitions(-DDFG)
+endif()
+
+if(INTER_ANALYSIS)
+ add_definitions(-DINTER_ANALYSIS)
+endif()
+
+if(INTRA_ANALYSIS)
+ add_definitions(-DINTRA_ANALYSIS)
+endif()
+
+if(GS_ONLY)
+ add_definitions(-DGS_ONLY)
+endif()
+
 # target_link_libraries(DFGPass LLVM)
 
 # Use C++11 to compile our pass (i.e., supply -std=c++11).

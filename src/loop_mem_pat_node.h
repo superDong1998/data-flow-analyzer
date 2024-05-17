@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "pattern.h"
+#include <stdio.h>
 
 enum loop_mem_pat_node_type_t {
     FUNC_NODE = 100,
@@ -56,7 +57,7 @@ public:
             int val = stoi(_end->getConstantNum());
             return val;
         }
-        return 0;
+        return 8;
     }
 
     int getStepVal() {
@@ -68,6 +69,18 @@ public:
             return val;
         }
         return 1;
+    }
+
+    PatNode* getStartNode() {
+        return _start;
+    }
+
+    PatNode* getEndNode() {
+        return _end;
+    }
+
+    PatNode* getStepNode() {
+        return _step;
     }
 };
 
@@ -188,6 +201,7 @@ public:
         // }
             return loop_pat;
         } else {
+            printf("should not come here\n");
             return nullptr;
         }
     }

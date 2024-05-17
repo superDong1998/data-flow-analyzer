@@ -109,9 +109,15 @@ public:
         loop_stack.push_back(_loop);
         auto parent = _loop->getParent();
         while (parent) {
-            loop_stack.push_back(parent);
+            if (parent->getType() == LOOP_NODE) {
+                loop_stack.push_back(parent);
+            }
             parent = parent->getParent();
         }
+        // if (loop_stack.size() == 1){
+        //     // single loop level: repush and analyze this single loop
+        //     loop_stack.push_back(_loop);
+        // }
         if (!loop_stack[1] || !loop_stack[0]) {return;}
         auto outer_loop_pat = loop_stack[1]->getLoopPat();
         auto inner_loop_pat = loop_stack[0]->getLoopPat();
@@ -179,8 +185,6 @@ public:
 
                     }
                 }
-
-
             }
         }
     }
