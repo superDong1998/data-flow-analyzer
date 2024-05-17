@@ -2,7 +2,7 @@
 Analyze data flow graph for C/C++/Fortran (maybe) programs.
 
 # Environment
-Please make sure you have ```gcc```, ```python```, and ```LLVM==10.0.0```
+Please make sure you have ```gcc```, ```python```, ```cmake```, and ```LLVM==10.0.0```
 
 # Build app with LLVM
 you can use provided ```Makefile``` at ```app_Makefile/``` directory, and please modify the target executable name at line 191
